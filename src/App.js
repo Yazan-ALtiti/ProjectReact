@@ -1,23 +1,35 @@
-import logo from './logo.svg';
-import './App.css';
+import React, { useState } from "react";
+import ExistingCars from "./components/ExistedCar";
+import mercedes from './assets/mercedes.jpg'
+import audi from './assets/audi.jpg'
+import hummer from './assets/hummer.jpg'
+import kia from './assets/Kia.jpg'
+import './components/App.css'
+import NewCarForm from "./components/NewCarForm";
+
+
 
 function App() {
+  const [carsData, setCarData] = useState([
+    { carName: "Marcedece", carPraic: 22000, carImage: mercedes, },
+    { carName: "audi", carPraic: 20000, carImage: audi, },
+    { carName: "hummer", carPraic: 11000, carImage: hummer },
+    { carName: "kia", carPraic: 15000, carImage: kia, }
+
+  ])
+
+  const handelrCarSubmit = (newCar) => {
+    setCarData([...carsData, newCar])
+  }
+
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <NewCarForm onSubmit={handelrCarSubmit} />
+      <ExistingCars carData={carsData} />
+
+
+
+
     </div>
   );
 }
